@@ -25,6 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->string('intrest_growth')->default(0);
             $table->string('invest_status')->default('pending');
             $table->string('received_status')->default('pending');
+            $table->string('upgrade_status')->default('no');
             $table->string('day_counter')->default(0);
             $table->string('no_of_days')->default(0);
 

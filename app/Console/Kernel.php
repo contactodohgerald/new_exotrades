@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
          $schedule->command('automatic_interest:adder')->daily();
          $schedule->command('updates:coin_prices')->everySixHours();
          $schedule->command('crypto_purchase_interest:adder')->daily();
-         $schedule->command('earning:adder')->everyMinute();
+         $schedule->command('earning:adder')->daily();
     }
 
     /**

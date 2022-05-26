@@ -41,7 +41,7 @@ $pageTitle = "Crypto Purchase";
 									<tr>
 										<th class="text-center">Rank</th>
 										<th class="text-center">Coin</th>
-										<th class="text-center">Last Price ($)</th>
+										<th class="text-center">Price</th>
 										<th class="text-center">Change (24h)</th>
 										<th class="text-center">Volume (24h)</th>
 										<th class="text-center">Total Marketcap ($)</th>
@@ -63,8 +63,9 @@ $pageTitle = "Crypto Purchase";
                                                         {{$each_coin->coin_name}}
                                                     </div>
                                                 </td>
+                                                @php if($each_coin->currrent_price > 1000){$new_amount = $each_coin->currrent_price - 100; }else{ $new_amount = $each_coin->currrent_price; } @endphp
                                                 <td class="text-center">
-                                                    <span class="font-w600">${{$each_coin->currrent_price}}</span>
+                                                    <span class="font-w600">${{number_format($new_amount, 2)}}</span>
                                                 </td>
                                                 <td class="text-center">
                                                     <span class="font-w500 text-success">{{$each_coin->percent_change_24h}}%</span>

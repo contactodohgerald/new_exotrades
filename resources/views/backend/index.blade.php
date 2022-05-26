@@ -45,17 +45,20 @@ $pageTitle = "Home Page";
 						<div class="card">
 							<div class="card-header d-flex border-0 pb-0">
 								<h3> <img src="{{asset('favicon.png') }}" width="25" height="25" alt=""> <span>Deposit</span></h3>
-								<a href="{{route('earnings-history')}}" class="btn-info" style="padding: 5px">View</a>
+								<a href="{{route('investment-history')}}" class="btn-info" style="padding: 5px">View</a>
 							</div>
 							<hr>
 							<div class="card-body border-bottom tab-content" style="padding-top: 0">
 								<div class="align-items-center">
 									<p class="text-black">Last:</p>
-									<h3 class="fs-20 font-w600 text-black ml-auto">${{($invest == null)? '0' : number_format($invest->amount)}}</h3>
+									@php $new_invest = ($invest == null)? 0 : $invest->amount @endphp
+									<h3 class="fs-20 font-w600 text-black ml-auto">${{ number_format($new_invest)}}</h3>
 								</div>
 								<div class="progress rounded-0">
-									<div class="progress-bar rounded-0 bg-primary progress-animated" style="width: 90%; height:12px;" role="progressbar">
-										<span class="sr-only">60% Complete</span>
+									@php $d1 = ($user_total_invest == 0) ? 1 : $user_total_invest @endphp
+									@php $deposit_percent = ($new_invest / $d1) * 100; @endphp
+									<div class="progress-bar rounded-0 bg-primary progress-animated" style="width: {{round($deposit_percent)}}%; height:12px;" role="progressbar">
+										<span class="sr-only">{{round($deposit_percent)}}% Complete</span>
 									</div>
 								</div>
 								<div class="d-flex align-items-center">
@@ -69,17 +72,20 @@ $pageTitle = "Home Page";
 						<div class="card">
 							<div class="card-header d-flex border-0 pb-0">
 								<h3> <img src="{{asset('favicon.png') }}" width="25" height="25" alt=""> <span>Earnings</span></h3>
-								<a href="{{route('investment-history')}}" class="btn-info" style="padding: 5px">View</a>
+								<a href="{{route('earnings-history')}}" class="btn-info" style="padding: 5px">View</a>
 							</div>
 							<hr>
 							<div class="card-body border-bottom tab-content" style="padding-top: 0">
 								<div class="align-items-center">
 									<p class="text-black">Last:</p>
-									<h3 class="fs-20 font-w600 text-black ml-auto">${{($earnings == null) ? '0' : number_format($earnings->amount)}}</h3>
+									@php $new_earning = ($earnings == null)? 0 : $earnings->amount @endphp
+									<h3 class="fs-20 font-w600 text-black ml-auto">${{number_format($new_earning)}}</h3>
 								</div>
 								<div class="progress rounded-0">
-									<div class="progress-bar rounded-0 bg-primary progress-animated" style="width: 39%; height:12px;" role="progressbar">
-										<span class="sr-only">60% Complete</span>
+									@php $d2 = ($user_total_earnings == 0) ? 1 : $user_total_earnings @endphp
+									@php $earning_percent = ($new_earning / $d2) * 100; @endphp
+									<div class="progress-bar rounded-0 bg-primary progress-animated" style="width: {{round($earning_percent)}}%; height:12px;" role="progressbar">
+										<span class="sr-only">{{round($earning_percent)}}% Complete</span>
 									</div>
 								</div>
 								<div class="d-flex align-items-center">
@@ -99,11 +105,14 @@ $pageTitle = "Home Page";
 							<div class="card-body border-bottom tab-content" style="padding-top: 0">
 								<div class="align-items-center">
 									<p class="text-black">Last:</p>
-									<h3 class="fs-20 font-w600 text-black ml-auto">${{($withdraw == null) ? '0':number_format($withdraw->amount)}}</h3>
+									@php $new_withdraw = ($withdraw == null)? 0 : $withdraw->amount @endphp
+									<h3 class="fs-20 font-w600 text-black ml-auto">${{number_format($new_withdraw)}}</h3>
 								</div>
 								<div class="progress rounded-0">
-									<div class="progress-bar rounded-0 bg-primary progress-animated" style="width: 60%; height:12px;" role="progressbar">
-										<span class="sr-only">60% Complete</span>
+									@php $d3 = ($user_total_withdraw == 0) ? 1 : $user_total_withdraw @endphp
+									@php $withdraw_percent = ($new_withdraw / $d3) * 100; @endphp
+									<div class="progress-bar rounded-0 bg-primary progress-animated" style="width: {{round($withdraw_percent)}}%; height:12px;" role="progressbar">
+										<span class="sr-only">{{round($withdraw_percent)}}% Complete</span>
 									</div>
 								</div>
 								<div class="d-flex align-items-center">

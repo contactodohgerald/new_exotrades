@@ -47,19 +47,20 @@ $pageTitle = "Crypto Purchase Page";
                                     </div>
                                     <div class="col-lg-12 text-center">
                                         <hr/>
-                                        <h3> <span class="text-danger">Note!</span> <br> 1 {{$coinsToPurchase->coin_symbol}} is equal to ${{ $coinsToPurchase->currrent_price }}  </h3>
+                                        @php if($coinsToPurchase->currrent_price > 1000){$new_amount = $coinsToPurchase->currrent_price - 100; }else{ $new_amount = $coinsToPurchase->currrent_price; } @endphp
+                                        <h3> <span class="text-danger">Note!</span> <br> 1 {{$coinsToPurchase->coin_symbol}} is equal to ${{number_format($new_amount, 2)}}  </h3>
                                         <hr/>
                                     </div>
                                     <div class="col-lg-12">
                                         <p class="text-center alert alert-warning mt-3">
-                                            You are about to purchase <span class="text-success">{{strtoupper($coinsToPurchase->coin_name)}}</span> from {{$setting->site_name}} at the rate of <span class="text-success">${{number_format($coinsToPurchase->currrent_price)}}</span> <br> <b>Note:</b> No service fee will be charged, {{$setting->site_name}} will automatically invest the said amount. <br> For further inqueries, please conatct our 24/7 live support or send an email to <a href="mailto::{{$setting->site_email}}">{{$setting->site_email}}</a>
+                                            You are about to purchase <span class="text-success">{{strtoupper($coinsToPurchase->coin_name)}}</span> from {{$setting->site_name}} at the rate of <span class="text-success">${{number_format($new_amount, 2)}}</span> <br> <b>Note:</b> No service fee will be charged, {{$setting->site_name}} will automatically invest the said amount. <br> For further inqueries, please conatct our 24/7 live support or send an email to <a href="mailto::{{$setting->site_email}}">{{$setting->site_email}}</a>
                                          </p>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <h3 class="m-0 text-center" style="border: 2px solid grey; padding: 3px; border-radius: 5px; background-color: grey; color: #fff"><span id="calculated_amount">0</span> {{$coinsToPurchase->coin_symbol}}</h3>
                                             <label for="amount">Amount</label>
-                                            <input type="number" onkeyup="calculateCoinValue({{$coinsToPurchase->currrent_price}})" class="form-control" name="amount" id="amount" placeholder="Enter Amount" required>
+                                            <input type="number" onkeyup="calculateCoinValue({{$new_amount}})" class="form-control" name="amount" id="amount" placeholder="Enter Amount" required>
                                         </div>
                                     </div>
                                     <button class="btn btn-primary" type="submit">Proceed</button>

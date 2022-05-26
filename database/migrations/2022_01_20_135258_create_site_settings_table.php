@@ -18,6 +18,7 @@ class CreateSiteSettingsTable extends Migration
             $table->string('unique_id')->unique();
             $table->string('site_name')->nullable();
             $table->string('site_email')->nullable();
+            $table->string('site_email_2')->nullable();
             $table->string('site_phone')->nullable();
             $table->string('site_address')->nullable();
             $table->string('site_domain')->nullable();
@@ -37,7 +38,10 @@ class CreateSiteSettingsTable extends Migration
             $table->string('min_wallet_withdrawal')->default(500);
             $table->string('min_amount_to_transfer')->default(100);
             $table->string('max_amount_to_transfer')->default(10000);
+            $table->string('return_coins_limit')->default(10);
             $table->string('automate_money_send')->default('yes');
+            $table->string('purchase_coin_percent')->default(3);
+            $table->string('purchase_coin_duration')->default(7);
 
             $table->softDeletes();  //add this line
             $table->timestamps();

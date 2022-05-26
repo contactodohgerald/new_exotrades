@@ -106,13 +106,12 @@ class TransactionInterestAdder extends Command
                             $earning->earning_type = 'capital_payout';
                             $earning->save();
 
-                            if($appSettings->automatic_payout_access == 'yes'){ 
-                                $payment_type = 'Capital Payout';
-                                if($appSettings->send_basic_emails == 'yes'){ 
-                                    $this->transaction->sendUserPaymentMail($each_user, $each_transaction, $dateFormat, $payment_type, $capital);
-                                }
+                            $payment_type = 'Capital Payout';
+                            if($appSettings->send_basic_emails == 'yes'){ 
+                                $this->transaction->sendUserPaymentMail($each_user, $each_transaction, $dateFormat, $payment_type, $capital);
                             }
-                             // add 1 to the day counter column
+                            
+                            // add 1 to the day counter column
                             $each_transaction->day_counter = $each_transaction->no_of_days;
                             //update the investment status to confirmed
                             $each_transaction->intrest_growth  = 0;

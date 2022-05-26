@@ -21,7 +21,9 @@
     
     @include('layouts.e_script')
     
-    @yield('extra_script')
+    @yield('extra_script') 
+
+    @include('tawk_to')
 	
 </body>
 
