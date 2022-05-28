@@ -76,7 +76,7 @@ $pageTitle = "Invest Page";
                                                         <div class="col-md-12">
                                                             <div class="new-arrival-content position-relative">
                                                                 <h3 class="text-center text-danger">
-                                                                    {{ $each_plan->plan_name }} PLAN
+                                                                    {{ $each_plan->plan_name }}
                                                                     <br>
                                                                     <input name="plan_unique_id" type="radio" style="height: 20px; width: 20px" value="{{ $each_plan->unique_id }}">
                                                                 </h3>
@@ -100,7 +100,7 @@ $pageTitle = "Invest Page";
                                                         <div class="col-md-12">
                                                             <div class="new-arrival-content position-relative">
                                                                 <h3 class="text-center text-danger">
-                                                                    {{ $each_plan->plan_name }} PLAN
+                                                                    {{ $each_plan->plan_name }}
                                                                     <br>
                                                                     <input name="plan_unique_id" type="radio" style="height: 20px; width: 20px" value="{{ $each_plan->unique_id }}">
                                                                 </h3>

@@ -1,5 +1,5 @@
 @php 
-$pageTitle = "Comfirm Crypto Purchase";
+$pageTitle = "Confirm Crypto Purchase";
 @endphp
 
 @include('includes.head')
@@ -30,7 +30,7 @@ $pageTitle = "Comfirm Crypto Purchase";
 					<ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{route('crypto-purchase')}}">Crypto Purchase</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Comfirm Crypto Purchase</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Confirm Crypto Purchase</a></li>
 					</ol>
                 </div>
                 <div class="container">

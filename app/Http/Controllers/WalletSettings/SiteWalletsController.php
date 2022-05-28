@@ -148,7 +148,7 @@ class SiteWalletsController extends Controller
                 $walletAddress->save();
 
                 Alert::success('Success', 'You request was successfully updated');
-                return redirect()->back();
+                return redirect()->to('view-site-wallet-page');
                       
             }else {
                 Alert::error('Error', 'An error occured, try again later');

@@ -28,11 +28,13 @@
     ***********************************-->
     <div class="nav-header">
         <a href="/" class="brand-logo">
-            <img src="{{ asset('logo_dark.png') }}" width="150px" alt="{{env('APP_NAME')}}">
+            <img src="{{ asset('logo_dark.png') }}" alt="{{env('APP_NAME')}}">
         </a>
         <div class="nav-control">
             <div class="hamburger">
-                <span class="line"></span><span class="line"></span><span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
             </div>
         </div>
     </div>

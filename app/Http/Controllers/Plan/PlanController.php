@@ -143,7 +143,7 @@ class PlanController extends Controller
                 $plan->save();
 
                 Alert::success('Success', 'You request was successfully updated');
-                return redirect()->back(); 
+                return redirect()->to('view-plan'); 
  
             }else {
                 Alert::error('Error', 'An error occured, try again later');
