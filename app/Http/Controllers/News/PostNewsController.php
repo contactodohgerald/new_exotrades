@@ -9,6 +9,7 @@ use App\Models\News\NewsPost;
 use App\Models\Settings\SiteSetting;
 use App\Traits\Generics;
 use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
 
 class PostNewsController extends Controller
 {

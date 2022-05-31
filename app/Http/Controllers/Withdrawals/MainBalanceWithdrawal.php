@@ -15,6 +15,7 @@ use App\Models\WalletAddress\UserWalletAddress;
 use App\Models\Withdraw;
 use App\Traits\Generics;
 use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
 
 class MainBalanceWithdrawal extends Controller
 {

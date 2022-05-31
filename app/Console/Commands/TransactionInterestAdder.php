@@ -73,26 +73,33 @@ class TransactionInterestAdder extends Command
                         //get the current date and time
                         $currentDate = Carbon::now();
                         $dateFormat = $currentDate->format('l jS \\of F Y h:i:s A');
-                        //to a check if the transactio date is still less than the number of days for that plan
+                        //to a check if the transaction date is still less than the number of days for that plan
                         if($each_transaction->day_counter == $each_transaction->plans->intrest_duration){
+                            //get the investment amount
+                            $cal_amount = ($each_transaction->amount * $each_transaction->plans->plan_percentage) / 100;
                             $earning = new Earning();
                             $earning->unique_id = $this->createUniqueId('earnings', 'unique_id');
                             $earning->user_unique_id = $each_user->unique_id;
                             $earning->transaction_id = $each_transaction->unique_id;
-                            $earning->amount = $each_transaction->intrest_growth;
+                            $earning->amount = $cal_amount;
                             $earning->earning_type = 'interest_payout';
                             $earning->save();
 
                             if($appSettings->automatic_payout_access != 'no'){ 
                                 $payment_type = 'Interest Payout';
                                 if($appSettings->send_basic_emails != 'no'){ 
-                                    $this->transaction->sendUserPaymentMail($each_user, $each_transaction, $dateFormat, $payment_type, $interest);
+                                    $this->transaction->sendUserPaymentMail($each_user, $each_transaction, $dateFormat, $payment_type);
                                 }
                             }
                             //update interest growth to 0
                             $each_transaction->intrest_growth = 0;
                             // add 1 to the day counter column
-                            $each_transaction->day_counter = 0;
+                            $each_transaction->day_counter = $each_transaction->no_of_days + 1;
+                            // add 1 to the number od days column 
+                            $each_transaction->no_of_days = $each_transaction->no_of_days + 1;
+                            $each_transaction->save();
+                        }elseif ($each_transaction->no_of_days > $each_transaction->plans->intrest_duration) {
+                            $each_transaction->day_counter = $each_transaction->no_of_days + 1;
                             // add 1 to the number od days column 
                             $each_transaction->no_of_days = $each_transaction->no_of_days + 1;
                             $each_transaction->save();
@@ -108,11 +115,12 @@ class TransactionInterestAdder extends Command
 
                             $payment_type = 'Capital Payout';
                             if($appSettings->send_basic_emails == 'yes'){ 
-                                $this->transaction->sendUserPaymentMail($each_user, $each_transaction, $dateFormat, $payment_type, $capital);
+                                $this->transaction->sendUserPaymentMail($each_user, $each_transaction, $dateFormat, $payment_type);
                             }
                             
+                            $each_transaction->day_counter = 0;
                             // add 1 to the day counter column
-                            $each_transaction->day_counter = $each_transaction->no_of_days;
+                            $each_transaction->day_counter = 0;
                             //update the investment status to confirmed
                             $each_transaction->intrest_growth  = 0;
                             $each_transaction->invest_status  = 'confirmed';
@@ -127,10 +135,18 @@ class TransactionInterestAdder extends Command
                             // add 1 to the number od days column 
                             $each_transaction->no_of_days = $each_transaction->no_of_days + 1;
                             //save new values to the database
-                            $each_transaction->save();
-                            if($appSettings->send_basic_emails != 'no'){ 
-                                // send investment mail the user
-                                $this->transaction->sendInvestmentSummaryMailToUser($each_user, $each_transaction, $dateFormat);
+                            if($each_transaction->save()){
+                                if($appSettings->send_basic_emails != 'no'){ 
+                                    // send investment mail the user
+                                    $this->transaction->sendInvestmentSummaryMailToUser($each_user, $each_transaction, $dateFormat);
+                                }
+                                $earning = new Earning();
+                                $earning->unique_id = $this->createUniqueId('earnings', 'unique_id');
+                                $earning->user_unique_id = $each_user->unique_id;
+                                $earning->transaction_id = $each_transaction->unique_id;
+                                $earning->amount = $cal_amount;
+                                $earning->earning_type = 'interest_earning';
+                                $earning->save();
                             }
                         }
                     }

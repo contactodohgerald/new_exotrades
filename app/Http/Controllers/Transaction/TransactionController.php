@@ -13,8 +13,11 @@ use App\Models\Plans\InvestmentPlan;
 use App\Models\Transaction\Transaction;
 use App\Models\Settings\SiteSetting;
 use App\Models\WalletAddress\WalletAddress;
+use App\Models\Earnings\Earning;
 use App\Traits\Generics;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
+use Exception;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
@@ -22,12 +25,13 @@ class TransactionController extends Controller
 {
     //
     use Generics;
-    public function __construct(InvestmentPlan $plan, SiteSetting $appSettings, Transaction $invest, User $user, WalletAddress $systemWallet){
+    public function __construct(InvestmentPlan $plan, SiteSetting $appSettings, Transaction $invest, User $user, WalletAddress $systemWallet, Earning $earning){
         $this->plan = $plan;
         $this->appSettings = $appSettings;
         $this->invest = $invest;
         $this->user = $user;
         $this->systemWallet = $systemWallet;
+        $this->earning = $earning;
     }
 
     public function investPageInterface(){
@@ -449,22 +453,30 @@ class TransactionController extends Controller
                 ['received_status', '!=', 'pending']
             ]);
 
-            if($transaction != null){
-                $transaction->intrest_growth = $data['intrest'];
+            if($transaction != null){ 
+                $transaction->intrest_growth = $transaction->intrest_growth + $data['new_intrest'];
                 $transaction->day_counter = $data['day_counter'];
                 $transaction->no_of_days = $data['day_counter'];
-                $transaction->save();
 
-                if($appSettings->send_basic_emails != 'no'){
-                    $currentDate = Carbon::now();
-                    $dateFormat = $currentDate->format('l jS \\of F Y h:i:s A'); 
-                    // send investment mail the user
-                    $this->invest->sendInvestmentSummaryMailToUser($transaction->users, $transaction, $dateFormat);
+                if($transaction->save()){
+                    if($appSettings->send_basic_emails != 'no'){
+                        $currentDate = Carbon::now();
+                        $dateFormat = $currentDate->format('l jS \\of F Y h:i:s A'); 
+                        // send investment mail the user
+                        $this->invest->sendInvestmentSummaryMailToUser($transaction->users, $transaction, $dateFormat);
+                    }
+
+                    $earning = new Earning();
+                    $earning->unique_id = $this->createUniqueId('earnings', 'unique_id');
+                    $earning->user_unique_id = $transaction->users->unique_id;
+                    $earning->transaction_id = $transaction->unique_id;
+                    $earning->amount = $data['new_intrest'];
+                    $earning->earning_type = 'interest_earning';
+                    $earning->save();
+
+                    Alert::success('Success', 'You request was successfully updated');
+                    return redirect()->back(); 
                 }
-
-                Alert::success('Success', 'You request was successfully updated');
-                return redirect()->back(); 
-
             }else{
                 Alert::error('Error', 'This transaction is yet to be confirmed, endeavor to do so before adding the interest');
                 return redirect()->back();

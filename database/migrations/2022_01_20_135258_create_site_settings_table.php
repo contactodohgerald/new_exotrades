@@ -42,6 +42,8 @@ class CreateSiteSettingsTable extends Migration
             $table->string('automate_money_send')->default('yes');
             $table->string('purchase_coin_percent')->default(3);
             $table->string('purchase_coin_duration')->default(7);
+            $table->string('earning_duration')->default(2);
+            $table->string('earnings_percent')->default(10);
 
             $table->softDeletes();  //add this line
             $table->timestamps();

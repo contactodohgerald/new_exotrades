@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 use Carbon\Carbon;
 use App\Actions\Fortify\UpdateUserPassword;
+use Exception;
 
 class ResetPasswordContoller extends Controller
 {

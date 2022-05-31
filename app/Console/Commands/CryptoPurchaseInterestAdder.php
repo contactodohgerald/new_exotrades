@@ -49,8 +49,8 @@ class CryptoPurchaseInterestAdder extends Command
 
     public function addNumberOfDaysToCryptoPurchase(){
 
-         //get all the users that are eligible for interest addittion 
-         $user = $this->user->getUsersWithCondition([
+        //get all the users that are eligible for interest addittion 
+        $user = $this->user->getUsersWithCondition([
             ['account_type', 'user'],
             ['status', 'active'],
         ]);

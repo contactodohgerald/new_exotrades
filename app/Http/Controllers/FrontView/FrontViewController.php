@@ -12,6 +12,7 @@ use App\Models\Plans\InvestmentPlan;
 use App\Models\Subscriber\Subscriber;
 use App\Traits\Generics; 
 use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
 
 class FrontViewController extends Controller
 {

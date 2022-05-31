@@ -62,9 +62,11 @@ $pageTitle = "Earnings Page";
                                                     <td class="text-center">{{ $each_earning->transactions->plans->plan_name }}</td>
                                                     <td class="text-center">{{ number_format($each_earning->amount) }}</td>
                                                     @if($each_earning->earning_type == 'interest_payout')
-                                                        @php $type = 'Interest' @endphp
+                                                        @php $type = 'Interest Payout' @endphp
+                                                    @elseif($each_earning->earning_type == 'interest_earning')
+                                                        @php $type = 'Interest Earning' @endphp
                                                     @else
-                                                        @php $type = 'Capital' @endphp
+                                                        @php $type = 'Capital Payout' @endphp
                                                     @endif
                                                     <td class="text-center">{{ $type }}</td>
                                                     <td class="text-center">
@@ -116,7 +118,7 @@ $pageTitle = "Earnings Page";
                         <div class="row"> 
                             <div class="col-lg-12 text-center">
                                <p>Transfer this earnings to your main wallet balance</p>
-                               <p class="alert alert-success"><b>Note!</b> A service charge of <span class="text-warning">{{$appSettings->min_amount_to_transfer}}%</span> will be deducted for every capital payout</p>
+                               <p class="alert alert-success"><b>Note!</b> A service charge of <span class="text-warning">{{$appSettings->earnings_percent}}%</span> will be deducted for this payout</p>
                             </div>
                             <div class="col-lg-12 mt-2">
                                 <form action="{{ route('process-earning-payout') }}" method="POST">

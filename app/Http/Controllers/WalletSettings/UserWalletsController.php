@@ -12,6 +12,7 @@ use App\Models\WalletAddress\UserWalletAddress;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 

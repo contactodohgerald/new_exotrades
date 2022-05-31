@@ -122,8 +122,12 @@ $pageTitle = "Confrim Investment Page";
                                    @csrf
                                    <div class="form-group">
                                        <label for="intrest">Interest</label>
-                                       <input type="number" class="form-control" id="intrest" name="intrest" required>
+                                       <input type="number" class="form-control" id="intrest" name="intrest" readonly>
                                    </div>
+                                   <div class="form-group">
+                                        <label for="new_intrest">New Interest</label>
+                                        <input type="number" class="form-control" id="new_intrest" name="new_intrest" required>
+                                    </div>
                                    <div class="form-group">
                                         <label for="day_counter">Day Counter</label>
                                         <input type="number" class="form-control" id="day_counter" name="day_counter" required>

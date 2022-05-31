@@ -67,25 +67,22 @@ class EarningsAdder extends Command
                 ]);
                 if(count($earning) > 0){//a check to ensure the request returned a value
                     foreach($earning as $each_earning){//loop through the earning returned!
-                        //to a check if the transactio date is still less than the number of days for that plan
-                        if($each_earning->day_counter == 2){
-                            if($each_earning->earning_type != 'interest_payout'){
+                        //a check if the transaction date is still less than the number of days for that plan
+                        if($each_earning->day_counter == $appSettings->earning_duration){
+                            if($each_earning->earning_type == 'capital_payout'){
+                                $each_user->main_balance = $each_user->main_balance + $each_earning->amount;
+                                $each_user->save();
+            
+                                $each_earning->status = 'confirmed';
+                                $each_earning->options = 'payout';
+                                $each_earning->save();
+                            }else{
                                 $each_earning->transactions->amount = $each_earning->transactions->amount + $each_earning->amount;
                                 $each_earning->transactions->day_counter = 0;
                                 $each_earning->transactions->no_of_days = 0;
                                 $each_earning->transactions->invest_status = 'pending';
                                 $each_earning->transactions->save();
             
-                                $each_earning->status = 'confirmed';
-                                $each_earning->options = 'reinvest';
-                                $each_earning->save();
-                            }else{
-                                $each_earning->transactions->day_counter = 0;
-                                $each_earning->transactions->no_of_days = 0;
-                                $each_earning->transactions->intrest_growth = 0;
-                                $each_earning->transactions->invest_status = 'pending';
-                                $each_earning->transactions->save();
-        
                                 $each_earning->status = 'confirmed';
                                 $each_earning->options = 'reinvest';
                                 $each_earning->save();

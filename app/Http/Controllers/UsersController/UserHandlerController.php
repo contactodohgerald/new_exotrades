@@ -21,6 +21,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\Rules;
 use App\Traits\Generics;
 use Carbon\Carbon;
+use Exception;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 

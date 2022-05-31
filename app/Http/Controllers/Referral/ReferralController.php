@@ -13,6 +13,7 @@ use App\Models\WalletAddress\UserWalletAddress;
 use App\Traits\Generics;
 use App\Models\Settings\SiteSetting;
 use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
 
 class ReferralController extends Controller
 {
@@ -67,19 +68,14 @@ class ReferralController extends Controller
 
     public function createComissionWithdrawInvoice(Request $request){
         try{
-            $user = Auth::user();
             $data = $request->all();
 
             $appSettings = $this->appSettings->getSettings();
 
-            $validator = Validator::make($data, [
+            $request->validate([
                 'user_wallet_unique_id' => 'required',
                 'amount' => 'required',
             ]);
-            if($validator->fails()){
-                Alert::error('Error', $validator->messages());
-                return redirect()->back();
-            }
 
             $wallet = $this->userWallet->getSingleUserWalletAddress([
                 ['unique_id', $data['user_wallet_unique_id']]
@@ -90,6 +86,7 @@ class ReferralController extends Controller
                 return redirect()->back();
             }
 
+            $user = Auth::user();
             if($user->ref_bonus_balance == 0){
                 Alert::error('Error', 'Insufficient fund');
                 return redirect()->back();
@@ -99,9 +96,8 @@ class ReferralController extends Controller
                 Alert::error('Error', 'Insufficient fund');
                 return redirect()->back();
             }
-
             $user->ref_bonus_balance = $user->ref_bonus_balance - $data['amount'];
-            $user->save(); 
+            $user->save();
 
             $withdrawal = new RefBalanceWithdraw();
             $withdrawal->unique_id = $this->createUniqueId('ref_balance_withdraws', 'unique_id');

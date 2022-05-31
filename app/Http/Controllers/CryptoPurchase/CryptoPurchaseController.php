@@ -16,6 +16,7 @@ use App\Models\Coins\CoinsToPurchase;
 use App\Models\WalletAddress\WalletAddress;
 use App\Traits\RequestHandler;
 use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
@@ -313,7 +314,7 @@ class CryptoPurchaseController extends Controller
 
                     if($appSettings->send_basic_emails != 'no'){
                         //send user deposit/investment mail
-                        $this->cryptoPurchase->sendDepositDeclineMail($user, $transaction); 
+                        $this->cryptoPurchase->sendDepositDeclineMail($user, $cryptoPurchase); 
                     }
                     $cryptoPurchase->received_status = 'decline';
                     if($cryptoPurchase->save()){

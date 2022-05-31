@@ -11,6 +11,9 @@ use App\Models\User;
 use App\Models\Plans\InvestmentPlan;
 use App\Traits\Generics;
 use RealRashid\SweetAlert\Facades\Alert; 
+use Exception;
+
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class PlanController extends Controller
 {

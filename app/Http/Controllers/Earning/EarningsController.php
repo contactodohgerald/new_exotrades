@@ -14,6 +14,7 @@ use App\Models\Settings\SiteSetting;
 use App\Models\Earnings\Earning;
 use App\Traits\Generics;
 use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
 
 class EarningsController extends Controller
 {
@@ -74,7 +75,7 @@ class EarningsController extends Controller
 
                 $initial_amount = 0;
                 if($earning->earning_type != 'interest_payout'){
-                    $initial_amount = ($earning->amount * $appSettings->min_amount_to_transfer) / 100;
+                    $initial_amount = ($earning->amount * $appSettings->earnings_percent) / 100;
                 }
 
                 $new_amount = $earning->amount - $initial_amount;
@@ -105,30 +106,22 @@ class EarningsController extends Controller
 
             $data = $request->all();
 
-            $appSettings = $this->appSettings->getSettings();
-
             $earning = $this->earning->getSingleEarning([
                 ['unique_id', $data['reinvestId']]
             ]);
 
             if($earning != null){
-                if($earning->earning_type != 'interest_payout'){
+                if($earning->earning_type == 'capital_payout'){
+                    $earning->users->main_balance = $earning->users->main_balance + $earning->amount;
+                    $earning->users->save();
+
+                    $earning->status = 'confirmed';
+                    $earning->options = 'payout';
+                    $earning->save();
+                }else{
                     $earning->transactions->amount = $earning->transactions->amount + $earning->amount;
                     $earning->transactions->day_counter = 0;
                     $earning->transactions->no_of_days = 0;
-                    $earning->transactions->invest_status = 'pending';
-                    $earning->transactions->save();
-
-                    $earning->status = 'confirmed';
-                    $earning->options = 'reinvest';
-                    $earning->save();
-
-                    Alert::success('Success', 'You request was successful');
-                    return redirect()->back();
-                }else{
-                    $earning->transactions->day_counter = 0;
-                    $earning->transactions->no_of_days = 0;
-                    $earning->transactions->intrest_growth = 0;
                     $earning->transactions->invest_status = 'pending';
                     $earning->transactions->save();
 

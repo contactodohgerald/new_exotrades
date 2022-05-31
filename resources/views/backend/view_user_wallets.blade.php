@@ -37,6 +37,7 @@ $pageTitle = "View User Wallet Page";
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">View User Wallet</h4>
+                                <a href="{{route('user-wallet-page')}}" class="btn btn-info">Add New Wallet</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

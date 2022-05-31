@@ -119,7 +119,7 @@ $pageTitle = "Funds Withdrawal Page";
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="alert alert-success text-center">
-                                        <p>please naviagte to the <a href="{{ route('edit-profile') }}">settings page</a> to set up your wallet address correctly to avoid loss of funds</p>
+                                        <p>Please naviagte to the <a href="{{ route('view-user-wallet-page') }}" target="_blank">wallet setup page</a> to set up your wallet address correctly to avoid loss of funds</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 mt-2">

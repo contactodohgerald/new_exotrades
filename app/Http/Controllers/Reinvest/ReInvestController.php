@@ -17,6 +17,7 @@ use App\Models\WalletAddress\UserWalletAddress;
 use App\Models\RefWithdrawal\RefBalanceWithdraw;
 use App\Traits\Generics;
 use RealRashid\SweetAlert\Facades\Alert;
+use Exception;
 
 class ReInvestController extends Controller
 {

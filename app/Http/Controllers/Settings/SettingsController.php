@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Settings\SiteSetting;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
