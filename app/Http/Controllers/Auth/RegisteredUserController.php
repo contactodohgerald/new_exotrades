@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
         ]);
       
         if($data['referral_code'] != ''){
-            $users = $this->user->getSingleUserRefferalCode([
+            $users = $this->user->getSingleUserWithCondition([
                 ['referral_id', $data['referral_code']]
             ]);
 
@@ -72,8 +72,7 @@ class RegisteredUserController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'referral_id' =>  $this->createUniqueId('users', 'referral_id'),
-            'referred_id_1' => $data['referral_code'] ? $data['referral_code'] : null,
-            'referred_id_2' => $this->getRefferal($data['referral_code']),
+            'referred_id' => $data['referral_code'] ? $data['referral_code'] : null,
             'account_number' => $this->createConfirmationNumbers('users', 'account_number', 6),
             'password' => Hash::make($data['password']),
         ]);
@@ -113,7 +112,7 @@ class RegisteredUserController extends Controller
 
         if($users != null){
             $fist_downline = $this->user->getSingleUserWithCondition([
-                ['referred_id_1', $users->referred_id_1]
+                ['referred_id', $users->referred_id]
             ]);
 
             $value = $fist_downline->referred_id_1;

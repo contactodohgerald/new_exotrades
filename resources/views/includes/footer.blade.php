@@ -39,7 +39,7 @@ s0.parentNode.insertBefore(s1,s0);
 
 <div class="footer">
     <div class="copyright">
-       <p> © <?php $d=date('Y'); print $d;?> <?php print @$siteName?>. All Rights Reserved</p>
+       <p> © 2019 - <?php $d=date('Y'); print $d;?> @ {{env('APP_NAME')}}. All Rights Reserved</p>
     </div>
 </div>
 

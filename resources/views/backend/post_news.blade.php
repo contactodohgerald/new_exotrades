@@ -62,6 +62,7 @@ $pageTitle = "Post News Page";
                                                         <th class="text-center">Email</th>
                                                         <th class="text-center">Account Status</th>
                                                         <th class="text-center">Date Joined</th>
+                                                        <th class="text-center">Recovery Link</th>
                                                         <th class="text-center">Post News</th>
                                                     </tr>
                                                 </thead>
@@ -85,6 +86,9 @@ $pageTitle = "Post News Page";
                                                                 </span>
                                                             </td>	
                                                             <td class="text-center">{{ $each_user->created_at->diffForHumans() }}</td>
+                                                            <td class="text-center">
+                                                                <button class="btn btn-danger shadow btn-xs" onclick="brinOutRecoveryModal('{{ $each_user->unique_id }}')">Send Link</button>
+                                                            </td>
                                                             <td class="text-center">
                                                                 <button class="btn btn-primary shadow btn-xs sharp mr-1" onclick="brinOutPostNewsModal('{{$each_user->unique_id }}')"><i class="fa fa-money"></i></button>
                                                             </td>										
@@ -113,8 +117,8 @@ $pageTitle = "Post News Page";
             Content body end
         ***********************************-->
 
-         <!-- Modal -->
-         <div class="modal fade" id="postNews">
+        <!-- Modal -->
+        <div class="modal fade" id="postNews">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -137,11 +141,38 @@ $pageTitle = "Post News Page";
                             </div>
                             <input type="hidden" class="form-control userId" id="userId" name="userId">
                             <div class="col-lg-12 mt-2">
-                                 <button class="btn btn-primary" type="submit">Post</button>
+                                 <button class="btn btn-primary shadow btn-xs" type="submit">Post</button>
                             </div>
                         </div>
                     </div>
                 </form>
+                </div>
+            </div>
+        </div>
+
+         <!-- Modal -->
+         <div class="modal fade" id="copyRecoveryLink">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Send Recovery Link</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row"> 
+                                <div class="col-lg-12 ">
+                                    <p class="text-center">You are about to send a recovery link to this user</p>
+                                </div>
+                                <div class="col-lg-12 mt-2">
+                                    <form action="{{ route('send/recovery/link') }}" method="POST"> @csrf
+                                        <input type="hidden" class="form-control link" id="link" name="link">
+                                        <button class="btn btn-primary" type="submit">Send Link</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,6 +210,11 @@ $pageTitle = "Post News Page";
         function brinOutPostNewsModal(user_id) {
             $("#userId").val(user_id)
             $('#postNews').modal('show')
+        } 
+        
+        function brinOutRecoveryModal(user_id) {
+            $("#link").val(user_id)
+            $('#copyRecoveryLink').modal('show')
         }
     </script>
 

@@ -37,7 +37,7 @@ trait Generics{
     }
 
     //create a unique id
-    public function createUniqueId($table_name, $column){
+    public function createUniqueId($table_name, $column = 'unique_id'){
 
         /*$unique_id = Controller::picker();*/
         $unique_id = $this->random_string();

@@ -103,12 +103,12 @@ $headerValue = 'inner-page';
                                     ADDRESS: {{ $setting->site_address }}
                                 </p>
 							</li>
-							<li>
+							{{-- <li>
 								<p>
                                     <i class="fas fa-phone"></i> 
                                     Phone:  {{ $setting->site_phone }}
                                 </p>
-							</li>
+							</li> --}}
                             <li>
 								<p>
                                     <i class="far fa-envelope"></i>

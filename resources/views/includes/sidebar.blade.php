@@ -40,17 +40,6 @@
                         <li><a href="{{ route('earnings-history') }}">Earning History</a></li>
                     </ul>
                 </li>
-                {{-- <li>
-                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="flaticon-381-heart"></i>
-                        <span class="nav-text">Transfer Funds <sup class="text-danger">New</sup></span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('transfer-funds-page') }}">Transfer Funds</a></li>
-                        <li><a href="{{ route('transfer-funds-history') }}">Transfer Funds History</a></li>
-                        <li><a href="{{ route('recieve-funds-history') }}">Recieve Funds History</a></li>
-                    </ul>
-                </li> --}}
                 <li>
                     <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-notepad"></i>
@@ -113,6 +102,16 @@
                         <li><a href="{{ route('view-user-wallet-page') }}">View Wallets</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-internet"></i>
+                        <span class="nav-text">Recovery Section<sup class="text-danger">New</sup></span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('portifolio/transfer') }}">Portifolio Transfer</a></li>
+                        <li><a href="{{ route('access/funds') }}">Acess Funds</a></li>
+                    </ul>
+                </li>
             @else
                 <li>
                     <a href="javascript:void()" class="has-arrow ai-icon" aria-expanded="false">
@@ -138,6 +137,17 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('pay-out') }}">Payouts</a></li>
                         <li><a href="{{ route('payment-history') }}">Payment History</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-internet"></i>
+                        <span class="nav-text">Recovery  Section<sup class="text-danger">New</sup></span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('view/recovery/request') }}">Recovery Request</a></li>
+                        <li><a href="{{ route('fund/transfer/request') }}">Fund Transfer Request</a></li>
+                        <li><a href="{{ route('access/fund/request') }}">Access Funds Request</a></li>
                     </ul>
                 </li>
                 <li>

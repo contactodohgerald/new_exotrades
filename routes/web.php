@@ -22,6 +22,8 @@ use App\Http\Controllers\Reinvest\ReInvestController;
 use App\Http\Controllers\EmergencyWithdraw\EmergencyCashoutController; 
 use App\Http\Controllers\TransferBalance\TransferMoneyToUser; 
 use App\Http\Controllers\CryptoPurchase\CryptoPurchaseController; 
+use App\Http\Controllers\Recovery\RecoveryController; 
+use App\Http\Controllers\Recovery\RecoveryControllerTwo; 
 
 /*
 |--------------------------------------------------------------------------
@@ -224,6 +226,35 @@ Route::middleware('auth')->group(function() {
     //posts
     Route::post('transfer-funds', [TransferMoneyToUser::class, 'transferFundsToUser'])->name('transfer-funds');
     Route::post('delete-funds', [TransferMoneyToUser::class, 'deleteTransferRequest'])->name('delete-funds');
+
+    // Route for RecoveryController
+    Route::get('user/account/recovery/{code?}', [RecoveryController::class, 'recoverInterfacePage'])->name('user/account/recovery');
+    Route::post('account/recovery', [RecoveryController::class, 'processRecoveryRequest'])->name('account/recovery');
+    Route::get('make/recovery/payment/{id?}', [RecoveryController::class, 'makeRecoveryPayment'])->name('make/recovery/payment');
+    Route::post('upload/recovery/proof/{id?}', [RecoveryController::class, 'uploadRecoveryProof'])->name('upload/recovery/proof');
+    Route::get('view/recovery/request', [RecoveryController::class, 'viewRecoveryRequest'])->name('view/recovery/request');
+    Route::get('confirm/recovery/request', [RecoveryController::class, 'viewRecoveryConfirmed'])->name('confirm/recovery/request');
+    Route::post('approve/recovery/request', [RecoveryController::class, 'approveRecoveryRequest'])->name('approve/recovery/request');
+    Route::post('delete/recovery/request', [RecoveryController::class, 'deleteRecoveryRequest'])->name('delete/recovery/request');
+    Route::get('portifolio/transfer', [RecoveryController::class, 'portifolioTransferInterface'])->name('portifolio/transfer'); 
+    //access funds 
+    Route::get('access/funds', [RecoveryController::class, 'accessFundsInterface'])->name('access/funds');   
+    Route::post('process/funds/access/{id?}', [RecoveryController::class, 'processFundsTransfer'])->name('process/funds/access');   
+    Route::get('funds/access/payment/{id?}', [RecoveryController::class, 'paymentInvoiceinterface'])->name('funds/access/payment');   
+    Route::post('upload/trader/fee/proof/{id?}', [RecoveryController::class, 'uploadTraderFeeProof'])->name('upload/trader/fee/proof');   
+    Route::post('send/recovery/link', [RecoveryController::class, 'sendRecoveryLink'])->name('send/recovery/link');   
+
+    // Route for RecoveryControllerTwo 
+    Route::get('make/service/charge/payment/{id?}', [RecoveryControllerTwo::class, 'makeServiceChargePayment'])->name('make/service/charge/payment');
+    Route::post('process/service/charge/{id?}', [RecoveryControllerTwo::class, 'processServiceCharge'])->name('process/service/charge');
+    Route::post('verify/account/id', [RecoveryControllerTwo::class, 'verifyAccountID'])->name('verify/account/id');
+    Route::get('recovery/phase/two/{id?}', [RecoveryControllerTwo::class, 'processRecoveryPhaseTwo'])->name('recovery/phase/two');
+    Route::get('fund/transfer/request', [RecoveryControllerTwo::class, 'viewFundTransfer'])->name('fund/transfer/request');
+    Route::get('service/charge/{id?}', [RecoveryControllerTwo::class, 'serviceChargeInterface'])->name('service/charge');
+    Route::post('upload/service/charge/proof/{id?}', [RecoveryControllerTwo::class, 'uploadServiceChargeProof'])->name('upload/service/charge/proof');
+    Route::post('approve/fund/transfer/request', [RecoveryControllerTwo::class, 'approveFundTransfer'])->name('approve/fund/transfer/request');
+    Route::post('delete/fund/transfer/request', [RecoveryControllerTwo::class, 'deleteFundTransferRequest'])->name('delete/fund/transfer/request');
+    Route::get('access/fund/request', [RecoveryControllerTwo::class, 'viewAccessFunds'])->name('access/fund/request');  
 
     // Route for CryptoPurchaseController
     //gets
