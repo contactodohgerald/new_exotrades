@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{ucfirst($user->settings->site_name)}} - Portfolio Transfer</title>
+    <title>{{ucfirst($user->settings->site_name)}} - News Alert</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
         /**
@@ -106,7 +106,7 @@
 
 <!-- start preheader -->
 <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-    {{ucfirst($user->settings->site_name)}} - Portfolio Transfer
+    {{$user->title}}
 </div>
 <!-- end preheader -->
 
@@ -135,7 +135,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Merriweather Bold', serif; border-top: 5px solid #1b1363;">
-                        <h2 style="margin: 0;  line-height: 28px; text-align:center">{{ucfirst($user->settings->site_name)}} - Portfolio Transfer</h2>
+                        <h2 style="margin: 0;  line-height: 28px; text-align:center">{{$user->title}}</h2>
                     </td>
                 </tr>
             </table>
@@ -161,8 +161,8 @@
                 </tr>
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Merriweather', serif; font-size: 16px; line-height: 24px;">
-                        <p style="margin: 0;">This is to inform you that your portfolio with account ID <b>{{$user->payment->recovery->account_id}}</b> valued at (<b>USD {{number_format($user->payment->recovery->portifolio_value)}} </b>) has been transferred successfully to your new portfolio </p>
-                        <p>Kindly Proceed with a 5% trader's fee (<b>USD {{number_format($user->payment->recovery->portifolio_value)}} </b>) payment of the portfolio total value To access your funds</p>
+                        <h2 style="margin: 0;">{{$user->title}}</h2>
+                        <p style="margin: 0;">{{$user->message}}</p>
                     </td>
                 </tr>
                 <!-- end copy -->

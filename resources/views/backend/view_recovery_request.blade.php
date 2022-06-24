@@ -47,6 +47,8 @@ $pageTitle = "Confirm Recovery Request Page";
                                                 <th class="text-center">User Email</th>
                                                 <th class="text-center">Recovery Amount</th>
                                                 <th class="text-center">Recovery Proof</th>
+                                                <th class="text-center">First Date</th>
+                                                <th class="text-center">Last Date</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center">Amount</th>
                                                 <th class="text-center">Payment Proof</th>
@@ -66,6 +68,8 @@ $pageTitle = "Confirm Recovery Request Page";
                                                     <td class="text-center">
                                                         <button class="btn btn-warning shadow btn-xs" onclick="viewRecoveryProof('{{$each_recovery->proof }}')">Proof</button>
                                                     </td>	
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($each_recovery->first_date)) }}</td>
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($each_recovery->last_date)) }}</td>
                                                     <td class="text-center">
                                                         <span class="badge light badge-{{ ($each_recovery->status == 'confirmed')?'success':'danger' }} ">
                                                             <i class="fa fa-circle text-{{ ($each_recovery->status == 'confirmed')?'success':'danger' }}  mr-1"></i>
@@ -126,6 +130,8 @@ $pageTitle = "Confirm Recovery Request Page";
                                                 <th class="text-center">User Email</th>
                                                 <th class="text-center">Recovery Amount</th>
                                                 <th class="text-center">Recovery Proof</th>
+                                                <th class="text-center">First Date</th>
+                                                <th class="text-center">Last Date</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center">Amount</th>
                                                 <th class="text-center">Payment Proof</th>
@@ -145,6 +151,8 @@ $pageTitle = "Confirm Recovery Request Page";
                                                     <td class="text-center">
                                                         <button class="btn btn-warning shadow btn-xs" onclick="viewRecoveryProof('{{$each_recovery->proof }}')">Proof</button>
                                                     </td>	
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($each_recovery->first_date)) }}</td>
+                                                    <td class="text-center">{{ date('d-m-Y', strtotime($each_recovery->last_date)) }}</td>
                                                     <td class="text-center">
                                                         <span class="badge light badge-{{ ($each_recovery->status == 'confirmed')?'success':'danger' }} ">
                                                             <i class="fa fa-circle text-{{ ($each_recovery->status == 'confirmed')?'success':'danger' }}  mr-1"></i>

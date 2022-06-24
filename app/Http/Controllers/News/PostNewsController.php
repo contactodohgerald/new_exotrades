@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\News\NewsPost;
-use App\Models\Settings\SiteSetting;
 use App\Traits\Generics;
 use RealRashid\SweetAlert\Facades\Alert;
 use Exception;
@@ -36,7 +35,6 @@ class PostNewsController extends Controller
 
     public function postNews(Request $request){
         try {
-
             $request->validate([
                 'news_tile' => 'required',
                 'news_body' => 'required',
@@ -49,7 +47,12 @@ class PostNewsController extends Controller
             $news_post->message_body = $request->news_body;
             $news_post->read_status = 'unread';
 
+            $user = $this->user->getSingleUserWithCondition([
+                ['unique_id', $request->userId],
+            ]);
+
             if($news_post->save()){
+                $this->newsPost->postNewsToUsers($user, $request->news_tile, $request->news_body);
                 Alert::success('Success', 'News Post posted successfully');
                 return redirect()->back(); 
             }else {

@@ -5,6 +5,8 @@ namespace App\Models\News;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Mail\PostNews; 
+use App\Models\Settings\SiteSetting; 
 
 class NewsPost extends Model
 {
@@ -27,6 +29,15 @@ class NewsPost extends Model
 
     public function getSingleNewsPost($condition){
         return NewsPost::where($condition)->first();
+    }
+
+     //send the email to the user involved
+     function postNewsToUsers($user, $title, $message){
+        $appSettings = new SiteSetting();
+        $user['settings'] = $appSettings->getSettings();
+        $user['title'] = $title;
+        $user['message'] = $message;
+        \Mail::to($user)->send(new PostNews($user));
     }
     
 }

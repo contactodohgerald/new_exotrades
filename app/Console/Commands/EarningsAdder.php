@@ -7,8 +7,6 @@ use App\Models\Settings\SiteSetting;
 use App\Models\User;
 use App\Models\Transaction\Transaction;
 use App\Models\Earnings\Earning;
-use Carbon\Carbon;
-use App\Traits\Generics;
 
 class EarningsAdder extends Command
 {

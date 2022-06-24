@@ -285,29 +285,34 @@ class RecoveryController extends Controller
             ['status', '=', 'confirmed']
         ]);
 
-        $recovery = $this->accountRecoveryTwo->getSingleAccountRecoveryTwo([
-            ['recovery_id', '=', $accountRecovery->unique_id],
-            ['status', '=', 'confirmed']
-        ]);
+        if($accountRecovery != null){
+            $recovery = $this->accountRecoveryTwo->getSingleAccountRecoveryTwo([
+                ['recovery_id', '=', $accountRecovery->unique_id],
+                ['status', '=', 'confirmed']
+            ]);
 
-        if($recovery == null){
-            Alert::error('Error', 'You have not made any recovery request');
+            if($recovery == null){
+                Alert::error('Error', 'You have not made any recovery request');
+                return redirect()->back();
+            }
+
+            $appSettings = $this->appSettings->getSettings();
+
+            $systemWallet = $this->systemWallet->getAllWalletAddress([
+                ['deleted_at', null]
+            ]);
+
+            $view = [
+                'accountRecovery'=>$accountRecovery,
+                'systemWallet'=>$systemWallet,
+                'appSettings'=>$appSettings,
+            ];
+
+            return view('backend.access_funds', $view);
+        }else{
+            Alert::error('Error', 'An error occured while processing request');
             return redirect()->back();
         }
-
-        $appSettings = $this->appSettings->getSettings();
-
-        $systemWallet = $this->systemWallet->getAllWalletAddress([
-            ['deleted_at', null]
-        ]);
-
-        $view = [
-            'accountRecovery'=>$accountRecovery,
-            'systemWallet'=>$systemWallet,
-            'appSettings'=>$appSettings,
-        ];
-
-        return view('backend.access_funds', $view);
     }
 
     public function processFundsTransfer(Request $request, $unique_id = null){

@@ -161,8 +161,8 @@
                 </tr>
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Merriweather', serif; font-size: 16px; line-height: 24px;">
-                        <p style="margin: 0;">Your Account ID <b>{{$user->payment->account_id}}</b> has been Retrieved with a portifolio value of <b>USD  {{number_format($user->payment->portifolio_value)}}</b>. After {{$user->payment->comp_days}} days of compounding rollover.</p>
-                        <p style="margin: 0;">Navivate to the recovery section on your dashboard and provide the Account ID <b>{{$user->payment->account_id}}</b> to transfer your old portifolio value <b>USD ({{number_format($user->payment->portifolio_value)}}.)</b> to your new portifolio, with a service fee of 2% of your total deposit <b>USD ({{number_format($user->payment->recovery_amount)}}) </b> with the old company.</p>
+                        <p style="margin: 0;">Your Account ID <b>{{$user->payment->account_id}}</b> has been Retrieved with portifolio value of <b>USD  {{number_format($user->payment->portifolio_value)}}</b>. After {{$user->payment->comp_days}} days of compounding rollover.</p>
+                        <p style="margin: 0;">Goto the recovery section on your dashboard and provide the Account ID <b>{{$user->payment->account_id}}</b> to transfer your old portifolio valued at <b>USD ({{number_format($user->payment->portifolio_value)}}.)</b> to your new portifolio, with 2% <b>USD ({{number_format($user->payment->recovery_amount)}}) </b> service fee of your total deposit, with the old portifolio.</p>
                     </td>
                 </tr>
                 <!-- end copy -->

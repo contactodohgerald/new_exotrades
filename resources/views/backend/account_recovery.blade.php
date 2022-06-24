@@ -81,7 +81,7 @@ $pageTitle = "Account Recovery Page";
                                                     @endif
                                                 </select>
                                             </div>      
-                                            <p class="alert alert-warning"> <b>NOTE!</b> <br> The details being requested above is to ensure that the  funds in the so-aclaimed portifolio is retrieved and transfered to the rightful owner.  </p>                    
+                                            <p class="alert alert-warning"> <b>NOTE!</b> <br> The details requested above ensures that the funds in the aclaimed portifolio is retrieved and transfered to the rightful owner. <br> Be adviced to provide the correct details </p>                    
                                             <button class="btn btn-primary" type="submit">Continue</button>
                                         </form>
                                     </div>       
