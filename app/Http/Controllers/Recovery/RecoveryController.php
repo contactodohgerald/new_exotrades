@@ -193,6 +193,9 @@ class RecoveryController extends Controller
                 $accountRecovery->payment_proof = $thumbnailUrl;
                 $accountRecovery->save();
 
+                $message = 'Payment proof of '.$thumbnailUrl.' was uploaded by '.$accountRecovery->user->name.'. Please confirm the request.';
+                $this->accountRecovery->sendAdminMail2($accountRecovery->users, $accountRecovery, $message); 
+
                 Alert::success('Success', 'We have received your payment proof, and our team of expert we review and begin processing your portifolio retrieval. Note this will take 2-3 working days');
                 return redirect()->back(); 
             }else {
@@ -208,6 +211,7 @@ class RecoveryController extends Controller
 
     public function approveRecoveryRequest(Request $request){
         try{
+            $user = Auth::user();
             $deleteStatus = 0;
             
             $dataArray = explode('|', $request->transId);
@@ -225,6 +229,8 @@ class RecoveryController extends Controller
                     if($appSettings->send_basic_emails != 'no'){
                         //send user confirm mail
                         $this->accountRecovery->sendRecoveryConfirmMail($accountRecovery->users, $accountRecovery); 
+                        $message = 'The recovery request of '.$accountRecovery->amount.' was confirmed by '.$user->name.'. for the total recovery of'.$accountRecovery->recovery_amount;
+                        $this->accountRecovery->sendAdminMail2($accountRecovery->users, $accountRecovery, $message); 
                     }
                     $deleteStatus = 1;
                 }
@@ -392,6 +398,9 @@ class RecoveryController extends Controller
 
                 $accountRecovery->proof = $thumbnailUrl;
                 $accountRecovery->save();
+
+                $message = 'Payment proof of '.$thumbnailUrl.' was uploaded by '.$accountRecovery->user->name.'. Please confirm the request.';
+                $this->accountRecovery->sendAdminMail2($accountRecovery->users, $accountRecovery, $message); 
 
                 Alert::success('Success', 'We have received your payment proof, and our team of expert we review and begin processing your portifolio retrieval. Note this will take 14-21 working days');
                 return redirect()->back(); 

@@ -129,6 +129,7 @@ class ResetPasswordContoller extends Controller
             }
 
             $user->password = Hash::make($data['password']);
+            $user->save();
 
             if($appSettings->send_basic_emails != 'no'){
 
@@ -138,8 +139,6 @@ class ResetPasswordContoller extends Controller
                 //send the activation code via email to the user
                 $this->confirmationCode->sendUserPasswordResetMail($user, $dateFormat);
             }
-
-            $user->save();
             //activation was successful, activate the user account
             return redirect()->route('login')->with('success', 'Password was successfully reset');
 

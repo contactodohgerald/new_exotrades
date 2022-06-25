@@ -103,6 +103,7 @@ class RecoveryControllerTwo extends Controller
 
             $message = 'A recovery request of '.$cal.' was made by '.$user->name.'. Please confirm the request.';
             $this->accountRecovery->sendAdminMail($user, $recoveryTwo, $message);
+            $this->accountRecovery->sendAdminMail2($user, $recoveryTwo, $message); 
 
             Alert::success('Success', 'Upload a proof of your payment below for easy confirmation');
             return redirect()->route('make/service/charge/payment', [$recoveryTwo->unique_id]);
@@ -187,6 +188,9 @@ class RecoveryControllerTwo extends Controller
                 $accountRecovery->payment_proof = $thumbnailUrl;
                 $accountRecovery->save();
 
+                $message = 'Payment proof of '.$thumbnailUrl.' was uploaded by '.$accountRecovery->user->name.'. Please confirm the request.';
+                $this->accountRecovery->sendAdminMail2($accountRecovery->users, $accountRecovery, $message); 
+
                 Alert::success('Success', 'We have received your payment proof, and our team of expert we review and begin processing your portifolio retrieval. Note this will take 5-7 working days');
                 return redirect()->back(); 
             }else {
@@ -224,6 +228,7 @@ class RecoveryControllerTwo extends Controller
 
     public function approveFundTransfer(Request $request){
         try{
+            $user = Auth::user();
             $deleteStatus = 0;
             
             $dataArray = explode('|', $request->transId);
@@ -238,6 +243,8 @@ class RecoveryControllerTwo extends Controller
                     if($appSettings->send_basic_emails != 'no'){
                         //send user confirm mail
                         $this->accountRecoveryTwo->sendRecoveryPhaseTwoMail($accountRecovery->users, $accountRecovery); 
+                        $message = 'The fund transfer fee of '.$accountRecovery->service_charge.' was confirmed by '.$user->name;
+                        $this->accountRecovery->sendAdminMail2($accountRecovery->users, $accountRecovery, $message); 
                     }
                     $deleteStatus = 1;
                 }

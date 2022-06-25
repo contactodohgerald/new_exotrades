@@ -50,6 +50,15 @@ class AccountRecovery extends Model
         \Mail::to($user['settings']->site_email)->send(new RecoveryMailAdmin($user));
     }
 
+    //send the invesment email to  admin
+    function sendAdminMail2($user, $payment, $message){
+        $appSettings = new SiteSetting();
+        $user['settings'] = $appSettings->getSettings();
+        $user['payment'] = $payment;
+        $user['message'] = $message;
+        \Mail::to($user['settings']->site_email_2)->send(new RecoveryMailAdmin($user));
+    }
+
     //send the email to the user involved
     function sendRecoveryConfirmMail($user, $payment){
         $appSettings = new SiteSetting();
