@@ -162,7 +162,7 @@
                 <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Merriweather', serif; font-size: 16px; line-height: 24px;">
                         <h2 style="margin: 0;">{{$user->title}}</h2>
-                        <p style="margin: 0;">{{$user->message}}</p>
+                        <p style="margin: 0;">{!! $user->message !!}</p>
                     </td>
                 </tr>
                 <!-- end copy -->

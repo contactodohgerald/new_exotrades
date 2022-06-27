@@ -1,4 +1,3 @@
-
 <script src="{{ asset('backend/vendor/global/global.min.js') }}"></script>
 <script src="{{ asset('backend/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('backend/vendor/chart.js/Chart.bundle.min.js') }}"></script>
@@ -18,6 +17,8 @@
 <script src="{{ asset('backend/js/deznav-init.js') }}"></script>
 <script src="{{ asset('backend/js/demo.js') }}"></script>
 <script src="{{ asset('backend/js/styleSwitcher.js') }}"></script>
+
+<script src="{{asset('summernote/summernote-lite.js')}}"></script>
 
 @include('tawk_to')
 

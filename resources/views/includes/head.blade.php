@@ -37,4 +37,7 @@
 	<link href="{{ asset('backend/css/mystyle.css') }}" rel="stylesheet">
 	<link href="{{ asset('backend/css/mainCss.css') }}" rel="stylesheet">
 
+    <!-- include summernote css/js -->
+    <link href="{{asset('summernote/summernote-lite.css')}}" rel="stylesheet">
+
 </head>

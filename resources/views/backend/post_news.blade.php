@@ -136,7 +136,7 @@ $pageTitle = "Post News Page";
                                </div>
                                <div class="form-group">
                                     <label for="news_body">News Body</label>
-                                    <textarea class="form-control" name="news_body" id="news_body" placeholder="News Body" required></textarea>
+                                    <textarea class="form-control" name="news_body" id="summernote" required></textarea>
                                 </div>
                             </div>
                             <input type="hidden" class="form-control userId" id="userId" name="userId">
@@ -207,6 +207,14 @@ $pageTitle = "Post News Page";
     @include('includes.e_script')
 
     <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'News Body',
+                tabsize: 2,
+                height: 100
+            });
+        });
+
         function brinOutPostNewsModal(user_id) {
             $("#userId").val(user_id)
             $('#postNews').modal('show')
